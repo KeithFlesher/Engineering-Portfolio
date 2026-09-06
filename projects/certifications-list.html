@@ -1,0 +1,970 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Certifications | Keith Flesher</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #071019;
+      --panel: rgba(8, 20, 31, 0.88);
+      --panel-light: rgba(12, 29, 43, 0.78);
+
+      --line: rgba(138, 192, 220, 0.30);
+      --line-bright: rgba(62, 159, 255, 0.65);
+
+      --grid-small: rgba(102, 177, 218, 0.08);
+      --grid-large: rgba(102, 177, 218, 0.14);
+
+      --text: #e7f3f8;
+      --muted: #a7bdc9;
+
+      --accent: #3e9fff;
+      --accent-light: #75bdff;
+
+      --paper: #e8e2d2;
+      --paper-text: #20242a;
+
+      --max-width: 1450px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(var(--grid-large) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-large) 1px, transparent 1px),
+        linear-gradient(var(--grid-small) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-small) 1px, transparent 1px),
+        var(--bg);
+
+      background-size:
+        120px 120px,
+        120px 120px,
+        24px 24px,
+        24px 24px;
+
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --------------------------------------------------
+       SITE SHELL
+    -------------------------------------------------- */
+
+    .site-shell {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 20px auto;
+      border: 1px solid var(--line);
+      background: rgba(4, 14, 23, 0.70);
+      box-shadow:
+        0 0 0 1px rgba(62, 159, 255, 0.04),
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-shell::before {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      top: -250px;
+      right: -180px;
+
+      background: rgba(62, 159, 255, 0.12);
+      filter: blur(90px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* --------------------------------------------------
+       HEADER
+    -------------------------------------------------- */
+
+    .topbar {
+      min-height: 72px;
+      padding: 0 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+
+      border-bottom: 1px solid var(--line);
+      background: rgba(4, 13, 22, 0.90);
+
+      position: sticky;
+      top: 0;
+      z-index: 50;
+
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--accent-light);
+    }
+
+    .menu-button {
+      display: none;
+
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+
+      padding: 8px 11px;
+      cursor: pointer;
+
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    /* --------------------------------------------------
+       MAIN
+    -------------------------------------------------- */
+
+    .page {
+      position: relative;
+      padding: 70px 60px 80px;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      bottom: -200px;
+      left: -180px;
+
+      background: rgba(62, 159, 255, 0.08);
+      filter: blur(100px);
+      border-radius: 50%;
+
+      pointer-events: none;
+    }
+
+    /* --------------------------------------------------
+       HERO
+    -------------------------------------------------- */
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto 55px;
+
+      border-left: 3px solid var(--accent);
+      padding-left: 28px;
+    }
+
+    .eyebrow {
+      margin-bottom: 10px;
+
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+
+      color: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      margin-top: 18px;
+
+      max-width: 760px;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .meta-tag {
+      border: 1px solid var(--line);
+      background: rgba(7, 20, 31, 0.65);
+
+      padding: 7px 11px;
+
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+
+      color: var(--muted);
+    }
+
+    /* --------------------------------------------------
+       SECTION
+    -------------------------------------------------- */
+
+    .section {
+      max-width: 1250px;
+      margin: 0 auto;
+
+      border: 1px solid var(--line);
+      background: var(--panel);
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-header {
+      min-height: 68px;
+      padding: 16px 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      border-bottom: 1px solid var(--line);
+      background: rgba(6, 17, 27, 0.75);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-number {
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-title h2 {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-status {
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-content {
+      padding: 30px;
+
+      background:
+        linear-gradient(var(--grid-small) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-small) 1px, transparent 1px);
+
+      background-size: 24px 24px;
+    }
+
+    /* --------------------------------------------------
+       CERTIFICATION CARDS
+    -------------------------------------------------- */
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .cert-card {
+      min-height: 410px;
+
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid var(--line);
+      background: rgba(5, 16, 26, 0.88);
+
+      position: relative;
+      overflow: hidden;
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--line-bright);
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.28),
+        0 0 25px rgba(62, 159, 255, 0.08);
+    }
+
+    .cert-card::before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+
+      background: var(--accent);
+
+      transform: scaleX(0);
+      transform-origin: left;
+
+      transition: transform 0.25s ease;
+    }
+
+    .cert-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .cert-image {
+      height: 220px;
+      padding: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-bottom: 1px solid var(--line);
+
+      background:
+        linear-gradient(var(--grid-small) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-small) 1px, transparent 1px),
+        rgba(8, 22, 34, 0.85);
+
+      background-size: 24px 24px;
+    }
+
+    .cert-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: block;
+
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.35));
+
+      transition: transform 0.25s ease;
+    }
+
+    .cert-card:hover .cert-image img {
+      transform: scale(1.035);
+    }
+
+    .cert-body {
+      padding: 24px;
+
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .cert-number {
+      margin-bottom: 9px;
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .cert-body h3 {
+      margin-bottom: 13px;
+
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 800;
+
+      text-transform: uppercase;
+    }
+
+    .cert-body p {
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .cert-footer {
+      margin-top: auto;
+      padding-top: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      border-top: 1px solid rgba(138, 192, 220, 0.16);
+
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cert-status {
+      color: var(--accent-light);
+    }
+
+    .cert-type {
+      color: var(--muted);
+    }
+
+    /* --------------------------------------------------
+       BOTTOM NAVIGATION
+    -------------------------------------------------- */
+
+    .bottom-nav {
+      max-width: 1250px;
+      margin: 30px auto 0;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 13px 18px;
+
+      border: 1px solid var(--line);
+      background: rgba(8, 20, 31, 0.82);
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+
+      transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-light);
+      border-color: var(--line-bright);
+      background: rgba(10, 28, 43, 0.90);
+    }
+
+    /* --------------------------------------------------
+       FOOTER
+    -------------------------------------------------- */
+
+    footer {
+      padding: 25px 30px;
+
+      border-top: 1px solid var(--line);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    footer span:first-child {
+      color: var(--accent);
+    }
+
+    /* --------------------------------------------------
+       RESPONSIVE
+    -------------------------------------------------- */
+
+    @media (max-width: 900px) {
+      .page {
+        padding: 55px 30px 65px;
+      }
+
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-card {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-shell {
+        width: calc(100% - 16px);
+        margin: 8px auto;
+      }
+
+      .topbar {
+        padding: 0 18px;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav {
+        display: none;
+
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+
+        padding: 15px 18px;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        border-bottom: 1px solid var(--line);
+        background: rgba(4, 13, 22, 0.97);
+      }
+
+      .nav.open {
+        display: flex;
+      }
+
+      .nav a {
+        padding: 13px 5px;
+        border-bottom: 1px solid rgba(138, 192, 220, 0.12);
+      }
+
+      .page {
+        padding: 42px 18px 50px;
+      }
+
+      .hero {
+        padding-left: 18px;
+        margin-bottom: 38px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero-subtitle {
+        font-size: 13px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .section-status {
+        padding-left: 27px;
+      }
+
+      .section-content {
+        padding: 18px;
+      }
+
+      .cert-image {
+        height: 190px;
+      }
+
+      .cert-body {
+        padding: 20px;
+      }
+
+      .cert-body h3 {
+        font-size: 19px;
+      }
+
+      .bottom-nav {
+        flex-direction: column;
+      }
+
+      .back-link {
+        justify-content: center;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 22px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site-shell">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+      <a href="../index.html" class="brand">
+        KEITH <span>FLESHER</span> // ENGINEERING
+      </a>
+
+      <button class="menu-button" id="menuButton">
+        MENU
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="../index.html">Home</a>
+        <a href="projects-list.html">Projects</a>
+        <a href="certifications-list.html">Certifications</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+    </header>
+
+
+    <!-- PAGE -->
+    <main class="page">
+
+      <!-- HERO -->
+      <section class="hero">
+
+        <div class="eyebrow">
+          Engineering Portfolio // Credentials
+        </div>
+
+        <h1>Certifications</h1>
+
+        <p class="hero-subtitle">
+          A record of certifications, recognitions, and professional
+          accomplishments supporting my engineering, design, manufacturing,
+          and technical development.
+        </p>
+
+        <div class="hero-meta">
+          <span class="meta-tag">CAD</span>
+          <span class="meta-tag">Design</span>
+          <span class="meta-tag">Engineering</span>
+          <span class="meta-tag">Leadership</span>
+        </div>
+
+      </section>
+
+
+      <!-- CERTIFICATIONS -->
+      <section class="section">
+
+        <div class="section-header">
+
+          <div class="section-title">
+            <span class="section-number">01</span>
+
+            <h2>Credentials & Recognition</h2>
+          </div>
+
+          <span class="section-status">
+            STATUS // ACTIVE RECORD
+          </span>
+
+        </div>
+
+
+        <div class="section-content">
+
+          <div class="cert-grid">
+
+            <!-- CERTIFICATION 01 -->
+            <article class="cert-card">
+
+              <div class="cert-image">
+                <img
+                  src="../assets/jpeg/Eagle scout 1.jpg"
+                  alt="Eagle Scout recognition"
+                />
+              </div>
+
+              <div class="cert-body">
+
+                <div class="cert-number">
+                  CERT-001 // LEADERSHIP
+                </div>
+
+                <h3>Eagle Scout</h3>
+
+                <p>
+                  Earned the rank of Eagle Scout in March 2023 and completed
+                  46 merit badges, significantly exceeding the requirements
+                  for the Eagle Scout rank. Developed leadership, project
+                  management, teamwork, and community service skills through
+                  years of scouting experience.
+                </p>
+
+                <div class="cert-footer">
+                  <span class="cert-status">ACHIEVED</span>
+                  <span class="cert-type">Leadership</span>
+                </div>
+
+              </div>
+
+            </article>
+
+
+            <!-- CERTIFICATION 02 -->
+            <article class="cert-card">
+
+              <div class="cert-image">
+                <img
+                  src="../assets/jpeg/certified-professional-Fusion 360.jpg"
+                  alt="Fusion 360 Certified Professional"
+                />
+              </div>
+
+              <div class="cert-body">
+
+                <div class="cert-number">
+                  CERT-002 // CAD
+                </div>
+
+                <h3>Fusion 360 Certified Professional</h3>
+
+                <p>
+                  Actively pursuing Autodesk Fusion 360 certification with a
+                  focus on mechanical design, parametric modeling,
+                  manufacturing, and engineering documentation.
+                </p>
+
+                <div class="cert-footer">
+                  <span class="cert-status">PENDING</span>
+                  <span class="cert-type">CAD / Design</span>
+                </div>
+
+              </div>
+
+            </article>
+
+
+            <!-- CERTIFICATION 03 -->
+            <article class="cert-card">
+
+              <div class="cert-image">
+                <img
+                  src="../assets/jpeg/project000-4.1.jpg"
+                  alt="TorqueDrive Socket Adapter capstone project"
+                />
+              </div>
+
+              <div class="cert-body">
+
+                <div class="cert-number">
+                  CERT-003 // RECOGNITION
+                </div>
+
+                <h3>Pikes Peak Regional Industry Capstone Recognition</h3>
+
+                <p>
+                  Presented the TorqueDrive Socket Adapter as part of a senior
+                  capstone engineering project to industry professionals and
+                  business leaders from across the Pikes Peak region. The
+                  project focused on solving a practical mechanical problem
+                  through design, prototyping, testing, and product
+                  development. Received formal recognition from Colorado
+                  Springs Chamber & EDC and the Pikes Peak region industry
+                  panel.
+                </p>
+
+                <div class="cert-footer">
+                  <span class="cert-status">RECOGNIZED</span>
+                  <span class="cert-type">Engineering</span>
+                </div>
+
+              </div>
+
+            </article>
+            <!-- CERTIFICATION 04 -->
+            <article class="cert-card">
+
+              <div class="cert-image">
+                <img
+                  src="../assets/jpeg/project000-4.1.jpg"
+                  alt="TorqueDrive Socket Adapter capstone project"
+                />
+              </div>
+
+              <div class="cert-body">
+
+                <div class="cert-number">
+                  CERT-Pending
+                </div>
+
+                <h3>Six Sigma White Belt</h3>
+
+                <p>
+                 Six Sigma White Belt
+Introductory certification in Six Sigma principles and process improvement. Developed an understanding of the DMAIC methodology, identifying process inefficiencies, reducing variation, and using data-driven approaches to improve quality and efficiency.
+                </p>
+
+                <div class="cert-footer">
+                  <span class="cert-status">Pending</span>
+                  <span class="cert-type">Engineering</span>
+                </div>
+
+              </div>
+
+            </article>
+
+            <!-- CERTIFICATION 05 -->
+            <article class="cert-card">
+
+              <div class="cert-image">
+                <img
+                  src="../assets/jpeg/Adobe_Certified_Professional_Adobe_Illustrator_digital_badge.png"
+                  alt="Adobe Illustrator Certified Professional"
+                />
+              </div>
+
+              <div class="cert-body">
+
+                <div class="cert-number">
+                  CERT-004 // DIGITAL DESIGN
+                </div>
+
+                <h3>Adobe Illustrator Certified Professional</h3>
+
+                <p>
+                  Earned certification in Adobe Illustrator, developing
+                  skills in vector graphics, technical diagrams, design
+                  communication, and professional digital illustration for
+                  engineering and project documentation.
+                </p>
+
+                <div class="cert-footer">
+                  <span class="cert-status">ACHIEVED</span>
+                  <span class="cert-type">Digital Design</span>
+                </div>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- BACK NAVIGATION -->
+      <div class="bottom-nav">
+
+        <a href="../index.html#experience-skills" class="back-link">
+          ← Back to Skills & Experience
+        </a>
+
+        <a href="projects-list.html" class="back-link">
+          View Engineering Projects →
+        </a>
+
+      </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+      <span>KEITH FLESHER // ENGINEERING PORTFOLIO</span>
+      <span>CERTIFICATIONS // 2026</span>
+    </footer>
+
+  </div>
+
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const nav = document.getElementById("nav");
+
+    menuButton.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+    });
+  </script>
+
+</body>
+</html>
+```

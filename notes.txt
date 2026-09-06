@@ -1,0 +1,71 @@
+run to push the code
+git add .
+git commit -m "describe what changed"
+git push
+
+
+https://www.svgrepo.com/svg/272677/industrial-robot-factory?edit=true   
+
+
+storage 
+<!-- =====================================================
+         CATEGORY BAND
+    ====================================================== -->
+
+    <div class="category-band">
+
+      <article class="category-card">
+
+        <div class="tag">
+          FIELD 01
+        </div>
+
+        <h3>
+          Mechanical Design
+        </h3>
+
+        <p>
+          CAD modeling, assemblies, technical drawings,
+          mechanical systems, prototyping, and design iteration.
+        </p>
+
+      </article>
+
+
+      <article class="category-card">
+
+        <div class="tag">
+          FIELD 02
+        </div>
+
+        <h3>
+          Manufacturing
+        </h3>
+
+        <p>
+          CNC routing, 3D printing, fabrication, machine tuning,
+          inspection, workholding, and production workflows.
+        </p>
+
+      </article>
+
+
+      <article class="category-card">
+
+        <div class="tag">
+          FIELD 03
+        </div>
+
+        <h3>
+          Robotics
+        </h3>
+
+        <p>
+          Competitive robotics, robot fabrication, mechanical
+          assembly, repair, testing, and technical leadership.
+        </p>
+
+      </article>
+
+    </div>
+
