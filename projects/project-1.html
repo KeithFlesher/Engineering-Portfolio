@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FRC Robotics| Keith Flesher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071019;
+      --panel: rgba(8, 20, 31, 0.88);
+      --line: rgba(138, 192, 220, 0.30);
+      --grid-small: rgba(102, 177, 218, 0.08);
+      --grid-large: rgba(102, 177, 218, 0.14);
+      --text: #e7f3f8;
+      --muted: #a7bdc9;
+      --accent: #3e9fff;
+      --paper: #e8e2d2;
+      --paper-text: #20242a;
+      --tape: rgba(207, 187, 145, 0.76);
+      --max-width: 1450px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid-large) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-large) 1px, transparent 1px),
+        linear-gradient(var(--grid-small) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-small) 1px, transparent 1px);
+      background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site-shell {
+      width: min(100% - 28px, var(--max-width));
+      margin: 14px auto;
+      border: 1px solid var(--line);
+      min-height: calc(100vh - 28px);
+      background-color: rgba(4, 12, 19, 0.82);
+      background-image:
+        linear-gradient(rgba(102,177,218,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102,177,218,.12) 1px, transparent 1px),
+        linear-gradient(rgba(102,177,218,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102,177,218,.055) 1px, transparent 1px);
+      background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-shell::before,
+    .site-shell::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .13;
+      background: #2a99ff;
+    }
+
+    .site-shell::before { left: -10vw; top: -14vw; }
+    .site-shell::after { right: -12vw; bottom: -18vw; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 72px;
+      padding: 14px 22px;
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(4, 12, 19, .88);
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .topnav {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .topnav a:hover { color: var(--text); }
+
+    .editor-toggle {
+      border: 1px solid var(--line);
+      background: rgba(62,159,255,.08);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+    }
+
+    
+
+    .project-nav {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 42px;
+    }
+
+    .project-nav a {
+      padding: 10px 11px;
+      border-left: 2px solid transparent;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .project-nav a:hover,
+    .project-nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(62, 159, 255, .07);
+    }
+
+    .drawing-block {
+      margin-top: auto;
+      border: 1px solid var(--line);
+      padding: 12px;
+      font-family: "Courier New", monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: .9fr 1.35fr;
+      gap: 28px;
+      padding: 48px 42px 36px;
+      min-height: 560px;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4.5rem);
+      line-height: .85;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 500;
+    }
+
+    .subtitle {
+      margin: 18px 0 20px;
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-family: "Courier New", monospace;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 62ch;
+      line-height: 1.7;
+    }
+
+    .meta {
+      margin-top: 24px;
+      display: grid;
+      gap: 7px;
+      color: #c9d8df;
+      font-size: .92rem;
+    }
+
+    .hero-visual {
+      min-height: 450px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-visual::after {
+      content: "EXPLODED ASSEMBLY / REV D";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      color: var(--muted);
+      font-size: .73rem;
+      font-family: "Courier New", monospace;
+      letter-spacing: .12em;
+    }
+
+    .section {
+      display: block;
+      border-bottom: 1px solid var(--line);
+      min-height: 420px;
+      position: relative;
+    }
+
+    .section-index {
+      padding: 22px 30px 18px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      display: grid;
+      grid-template-columns: 64px minmax(180px, 300px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      background: rgba(5, 17, 27, .72);
+    }
+
+    .section-index .number {
+      font-size: 2.15rem;
+      color: var(--accent);
+      font-family: "Courier New", monospace;
+    }
+
+    
+.section-index h2 {
+    margin: 0;
+    padding-left: 16px;
+    border-left: 6px solid #ff6749;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: .045em;
+    font-family: "Courier New", monospace;
+
+    white-space: nowrap;
+    min-width: max-content;
+}
+
+
+    .section-index p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .92rem;
+      max-width: 64ch;
+    }
+
+    .flow-line { display: none; }
+
+    .section-content {
+      padding: 30px;
+      display: grid;
+      gap: 24px;
+      align-content: center;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .copy h3 {
+      margin: 0 0 10px;
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .paper-note {
+      background: var(--paper);
+      color: #20242a;
+      padding: 18px 18px 22px;
+      box-shadow: 0 18px 42px rgba(0,0,0,.34);
+      transform: rotate(var(--rotation, -1deg));
+      position: relative;
+      font-family: "Patrick Hand", "Segoe Print", cursive;
+      font-size: 1.08rem;
+      letter-spacing: .01em;
+    }
+
+    .paper-note h3,
+    .paper-note p,
+    .paper-note ul,
+    .paper-note li {
+      color: #20242a !important;
+      opacity: 1 !important;
+    }
+
+    .paper-note h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      letter-spacing: .035em;
+    }
+
+    .paper-note ul {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+      line-height: 1.45;
+    }
+
+    .photo-card {
+      --rotation: 0deg;
+      --scale: 1;
+      position: relative;
+      transform: rotate(var(--rotation)) scale(var(--scale));
+      transform-origin: center;
+      transition: transform .18s ease, box-shadow .18s ease;
+      background: #d7d7d2;
+      color: #20252a;
+      padding: 10px 10px 28px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.42);
+      max-width: 100%;
+      isolation: isolate;
+    }
+
+    .photo-card:hover {
+      --scale: 1.015;
+      z-index: 4;
+      box-shadow: 0 28px 65px rgba(0,0,0,.54);
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: var(--ratio, 4 / 3);
+      object-fit: cover;
+      background: linear-gradient(135deg, #162633, #27485b);
+      border: 1px solid rgba(20,35,45,.25);
+    }
+
+    .photo-card figcaption {
+      margin-top: 10px;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: .82rem;
+      letter-spacing: .01em;
+    }
+
+    .tape {
+      display: none;
+      position: absolute;
+      width: 76px;
+      height: 25px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.08), transparent 16%, transparent 84%, rgba(0,0,0,.06)),
+        var(--tape);
+      box-shadow: 0 2px 5px rgba(0,0,0,.18);
+      opacity: .9;
+      z-index: 5;
+      clip-path: polygon(2% 15%, 98% 0, 100% 84%, 0 100%);
+      pointer-events: none;
+    }
+
+    .photo-card.tape-tl .tape.tl,
+    .photo-card.tape-tr .tape.tr,
+    .photo-card.tape-bl .tape.bl,
+    .photo-card.tape-br .tape.br { display: block; }
+
+    .tape.tl { top: -8px; left: -24px; transform: rotate(-34deg); }
+    .tape.tr { top: -8px; right: -24px; transform: rotate(34deg); }
+    .tape.bl { bottom: -7px; left: -24px; transform: rotate(31deg); }
+    .tape.br { bottom: -7px; right: -24px; transform: rotate(-31deg); }
+
+    .blueprint-frame {
+      border: 1px solid rgba(78, 164, 255, .72);
+      padding: 12px;
+      position: relative;
+      background: rgba(7, 18, 28, .72);
+      box-shadow: inset 0 0 0 4px rgba(62,159,255,.03);
+    }
+
+    .blueprint-frame::before,
+    .blueprint-frame::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-color: var(--accent);
+    }
+
+    .blueprint-frame::before {
+      top: 5px;
+      left: 5px;
+      border-top: 2px solid;
+      border-left: 2px solid;
+    }
+
+    .blueprint-frame::after {
+      bottom: 5px;
+      right: 5px;
+      border-bottom: 2px solid;
+      border-right: 2px solid;
+    }
+
+    .iteration-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: center;
+    }
+
+    .iteration-step { position: relative; }
+
+    .iteration-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -16px;
+      top: 44%;
+      color: var(--text);
+      font-size: 1.65rem;
+      z-index: 10;
+    }
+
+    .callout {
+      color: var(--accent);
+      font-family: "Courier New", monospace;
+      font-size: .82rem;
+      margin-top: 10px;
+    }
+
+    .final-product {
+      display: grid;
+      grid-template-columns: 1.4fr .75fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .final-visual {
+      min-height: 410px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .spec-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .spec {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    .spec span {
+      display: block;
+      color: var(--muted);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 3px;
+    }
+
+    .spec strong { font-size: 1.25rem; }
+
+    .footer {
+      padding: 30px;
+      color: var(--muted);
+      font-family: "Courier New", monospace;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    /* Editor panel: lets you click an image, rotate it, and toggle tape corners. */
+    .editor-panel {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 280px;
+      padding: 16px;
+      background: rgba(5, 14, 22, .96);
+      border: 1px solid rgba(62,159,255,.55);
+      box-shadow: 0 18px 55px rgba(0,0,0,.55);
+      z-index: 100;
+      display: none;
+    }
+
+    body.editor-open .editor-panel { display: block; }
+    body.editor-open .photo-card { cursor: pointer; }
+    body.editor-open .photo-card.selected { outline: 2px solid var(--accent); outline-offset: 5px; }
+
+    .editor-panel h3 {
+      margin: 0 0 12px;
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      font-size: .95rem;
+    }
+
+    .editor-panel label {
+      display: block;
+      margin: 10px 0 5px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .editor-panel input[type="range"] { width: 100%; }
+
+    .corner-controls {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .corner-controls button,
+    .reset-button {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .corner-controls button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(62,159,255,.1);
+    }
+
+    .editor-help {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.45;
+    }
+
+
+    .category-band {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+    .category-card {
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      background: rgba(62,159,255,.035);
+    }
+    .category-card:last-child { border-right: 0; }
+    .category-card .tag {
+      color: var(--accent);
+      font-family: "Courier New", monospace;
+      font-size: .75rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .category-card h3 { margin: 8px 0; font-family: "Courier New", monospace; text-transform: uppercase; }
+    .category-card p { margin: 0; color: var(--muted); line-height: 1.6; font-size: .9rem; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      padding: 16px;
+      background: rgba(8,20,31,.7);
+    }
+    .metric span { display:block; color:var(--muted); font-size:.7rem; text-transform:uppercase; letter-spacing:.12em; }
+    .metric strong { display:block; margin-top:7px; font-size:1.35rem; color:var(--text); }
+    .diagram-grid {
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:24px;
+      align-items:start;
+    }
+    .process-list { display:grid; gap:14px; }
+    .process-step { border-left:2px solid var(--accent); padding:4px 0 4px 15px; }
+    .process-step strong { display:block; font-family:"Courier New", monospace; text-transform:uppercase; }
+    .process-step span { color:var(--muted); line-height:1.55; font-size:.9rem; }
+    .quote-block { border:1px solid var(--line); padding:20px; color:var(--muted); line-height:1.7; }
+    .quote-block strong { color:var(--text); }
+
+    @media (max-width: 1000px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .section { display: block; }
+      .section-index {
+        grid-template-columns: 56px minmax(160px, 240px) minmax(0, 1fr);
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .flow-line { display: none; }
+      .iteration-strip { grid-template-columns: repeat(1, minmax(0,1fr)); }
+      .category-band, .metric-grid, .diagram-grid { grid-template-columns: 1fr 1fr; }
+      .iteration-step::after { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .site-shell { width: 100%; margin: 0; border-left: 0; border-right: 0; }
+      .topnav { display: none; }
+      .hero { padding: 34px 20px; }
+      .section-index {
+        grid-template-columns: 48px 1fr;
+        padding: 18px 20px;
+      }
+      .section-index p {
+        grid-column: 1 / -1;;
+      }
+      .section-content { padding: 20px; }
+      .split, .three-col, .final-product { grid-template-columns: 1fr; }
+      .iteration-strip { grid-template-columns: 1fr; }
+      .category-band, .metric-grid, .diagram-grid { grid-template-columns: 1fr; }
+      .editor-panel { left: 10px; right: 10px; width: auto; }
+    }
+    .tuning-story {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.tuning-card {
+  border: 1px solid var(--line);
+  background: rgba(8, 20, 31, .72);
+  padding: 20px;
+  min-width: 0;
+}
+
+.tuning-card .step-label {
+  color: var(--accent);
+  font-family: "Courier New", monospace;
+  font-size: .76rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.tuning-card h3 {
+  margin: 8px 0 10px;
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  font-size: 1.08rem;
+}
+
+.tuning-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.tuning-evidence {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 24px;
+  align-items: start;
+  margin-top: 28px;
+}
+/* Year 01 gallery: two equal columns filling the available width */
+.frc-gallery.frc-gallery-small {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px;
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch;
+}
+
+.frc-gallery.frc-gallery-small .photo-card {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.frc-gallery.frc-gallery-small .photo-card img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+/* Stack the images on narrow mobile screens */
+@media (max-width: 500px) {
+    .frc-gallery.frc-gallery-small {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a href="#top" class="brand">Keith Flesher / FRC Robotics</a>
+      
+      <nav class="topnav">
+        <a href="../index.html#projects" class="project-detail__back">
+      ← Back to Projects
+    </a>
+    <!--
+        <a href="#overview">Overview</a>
+        <a href="#manufacturing">Manufacturing</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#tuning">Tuning</a>
+        <a href="#results">Results</a>
+      -->
+      </nav>
+    </header>
+
+    <div class="page" id="top">
+     
+          
+        </div>
+      </aside>
+
+      <main>
+        <section class="hero">
+          <div>
+            <h1>FRC Robotics</h1>
+            <div class="subtitle">Engineering · leadership ·Coopetition·  Manufacturing</div>
+            <p class="lead">
+            <div class="meta">durring my time on the team I was able to learn and grow as a leader and engineer. I was able to lead a team of students in the manufacturing of robot components, while also learning how to program and operate CNC machines. I was also able to learn how to work with a team of students to design and build a robot that could compete at a high level. I was able to learn how to work with a team of students to design and build a robot that could compete at a high level. I was also able to learn how to work with a team of students to design and build a robot that could compete at a high level.
+              <div>ROLE — FABRICATION LEAD • CNC Machinist & CNC PROGRAMMER • Teacher • Speachproi</div>
+              <div>DURATION — THREE COMPETITION SEASONS</div>
+              <div>TOOLS — FUSION 360 MANUFACTURING, ONSHAPE, MACH 4, MATERIAL TRACKING, CALIPERS, MICROMETERS, BORE GAUGES, AND DIAL INDICATORS.</div>
+            </div>
+          </div>
+          <div class="hero-visual blueprint-frame">
+            <figure class="photo-card tape-tl tape-br" data-rotate="-1.2" style="--rotation:-1.2deg; width:min(94%,780px); --ratio:10/10;">
+              <span class="tape tl"></span><span class="tape tr"></span><span class="tape bl"></span><span class="tape br"></span>
+              <img src="../assets/jpeg/Project_1/1.jpg" alt="2024 FRC Robotics Season" />
+              <figcaption>  </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <div class="category-band" id="overview">
+          <article class="category-card"><div class="tag"></div><h3>Engineering</h3><p>CAM, workholding, tooling, sheet processing, inspection, and finished robot components.</p></article>
+          <article class="category-card"><div class="tag"></div><h3>Leadership</h3><p>Training students, managing priorities, coordinating with CAD, and keeping production moving under deadlines.</p></article>
+          <article class="category-card"><div class="tag"></div><h3>Tuning</h3><p>Backlash, steps-per-unit, gantry synchronization, limit switches, accuracy checks, and failure recovery.</p></article>
+        </div>
+
+
+      <div class="section-index"><h2>Year 01 / Learning the process</h2><p>   </p><div class="flow-line"></div></div>
+     <section class="hero">
+          <div>
+            <div class="eyebrow"></div>
+            <h1>FRC Robotics</h1>
+
+
+    
+    <p class="year-intro">My first season was about learning how the team turned ideas into a working competition robot. I began developing an understanding of manufacturing, machine operation, part inspection, and the relationship between CAD design and the physical assembly.</p>
+    
+<div class="frc-gallery frc-gallery-small">
+
+    <figure class="photo-card" style="--rotation:-1deg;">
+        <span class="tape tl"></span>
+        <img
+            src="../assets/jpeg/Project_1/2.jpg"
+            alt="Fusion 360 manufacturing toolpaths"
+        >
+        <figcaption>Learning CAM and toolpath planning</figcaption>
+    </figure>
+
+    <figure class="photo-card" style="--rotation:1deg;">
+        <span class="tape tr"></span>
+        <img
+            src="../assets/jpeg/Project_1/3.jpg"
+            alt="CNC router machining a robot component"
+        >
+        <figcaption>Learning machine setup and operation</figcaption>
+    </figure>
+
+</div>
+
+
+
+
+
+
+
+
+
+        <section class="frc-year frc-year-2" id="year-two">
+          <div class="frc-year-inner">
+            <div class="year-label">Year 02 / Taking ownership</div>
+            <h2 class="year-title">From operator to contributor</h2>
+            <p class="year-intro">As I gained experience, I took on more responsibility for planning and producing robot components. I coordinated with CAD and mechanical teams, organized parts by material and build order, and began helping other students learn the manufacturing workflow.</p>
+            <div class="frc-gallery frc-gallery-large">
+              <figure class="photo-card" style="--rotation:-1.2deg;"><span class="tape tl"></span><span class="tape br"></span><img src="../assets/jpeg/Project_2/4.jpeg" alt="Finished CNC-machined robot parts"><figcaption>Inspecting and preparing finished parts</figcaption></figure>
+              <figure class="photo-card" style="--rotation:1deg;"><span class="tape tr"></span><span class="tape bl"></span><img src="../assets/jpeg/Project_2/6.jpeg" alt="Training students on CNC machine setup"><figcaption>Sharing machine setup and operating procedures</figcaption></figure>
+            </div>
+            <div class="year-detail">
+              <div class="copy"><h3>Keeping production organized</h3><p>I coordinated manufacturing around the robot's assembly sequence, considering stock size, material, tooling, and which parts were needed first. This helped connect the manufacturing schedule to the mechanical team's progress. I also started explaining not just which steps to follow, but why each setup and inspection step mattered.</p></div>
+              <div class="paper-note" style="--rotation:-1deg;"><h3>Growing responsibilities</h3><ul><li>Organizing part queues and materials</li><li>Coordinating with CAD and mechanical teams</li><li>Teaching students CNC workflow fundamentals</li><li>Documenting repeatable machine procedures</li></ul></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="frc-year frc-year-3" id="year-three">
+          <div class="frc-year-inner">
+            <div class="year-label">Year 03 / Competition and leadership</div>
+            <h2 class="year-title">Working under real competition pressure</h2>
+            <p class="year-intro">By this stage, I had developed a stronger role in fabrication and troubleshooting. I helped keep production moving during a critical machine failure and worked with the team to diagnose, repair, and recalibrate the CNC router so we could continue producing accurate robot parts.</p>
+            <div class="frc-gallery frc-gallery-medium">
+              <figure class="photo-card" style="--rotation:-1deg;"><span class="tape tl"></span><img src="../assets/jpeg/Project_2/9.jpeg" alt="CNC gantry and calibration work"><figcaption>Investigating alignment and machine motion</figcaption></figure>
+              <figure class="photo-card" style="--rotation:1deg;"><span class="tape tr"></span><img src="../assets/jpeg/Project_2/10.jpeg" alt="Dial indicator used for CNC calibration"><figcaption>Measuring backlash and repeatability</figcaption></figure>
+              <figure class="photo-card" style="--rotation:-.5deg;"><span class="tape bl"></span><img src="../assets/jpeg/Project_2/11.jpeg" alt="Bearing hole dimensional validation"><figcaption>Checking fit and dimensional accuracy</figcaption></figure>
+            </div>

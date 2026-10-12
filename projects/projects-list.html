@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+<meta
+ name="viewport"
+ content="width=device-width, initial-scale=1.0"
+/>
+
+<meta
+ name="description"
+ content="Keith Flesher — Engineering project portfolio covering robotics, CNC manufacturing, mechanical design, fabrication, and product development."
+/>
+
+  <title>All Projects | Keith Flesher</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    :root {
+
+      --bg: #071019;
+
+      --panel: rgba(8, 20, 31, 0.88);
+      --panel-light: rgba(8, 20, 31, 0.68);
+
+      --line: rgba(138, 192, 220, 0.30);
+      --line-bright: rgba(62, 159, 255, 0.62);
+
+      --grid-small: rgba(102, 177, 218, 0.08);
+      --grid-large: rgba(102, 177, 218, 0.14);
+
+      --text: #e7f3f8;
+      --muted: #a7bdc9;
+
+      --accent: #3e9fff;
+      --accent-bright: #6db7ff;
+
+      --orange: #ff6749;
+
+      --paper: #e8e2d2;
+      --paper-text: #20242a;
+
+      --max-width: 1500px;
+
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      color: var(--text);
+
+      font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background-color: var(--bg);
+
+      background-image:
+
+        linear-gradient(
+          var(--grid-large) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          var(--grid-large) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          var(--grid-small) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          var(--grid-small) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        120px 120px,
+        120px 120px,
+        24px 24px,
+        24px 24px;
+
+    }
+
+
+    body::before,
+    body::after {
+
+      content: "";
+
+      position: fixed;
+
+      z-index: -1;
+
+      width: 45vw;
+      height: 45vw;
+
+      border-radius: 50%;
+
+      filter: blur(120px);
+
+      opacity: .12;
+
+      background: #2a99ff;
+
+      pointer-events: none;
+
+    }
+
+
+    body::before {
+
+      left: -15vw;
+      top: -15vw;
+
+    }
+
+
+    body::after {
+
+      right: -15vw;
+      bottom: -18vw;
+
+    }
+
+
+    a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+
+    /* =========================================================
+       MAIN SHELL
+    ========================================================= */
+
+
+    .site-shell {
+
+      width: min(
+        calc(100% - 28px),
+        var(--max-width)
+      );
+
+      min-height: calc(100vh - 28px);
+
+      margin: 14px auto;
+
+      border: 1px solid var(--line);
+
+      background-color: rgba(4, 12, 19, .82);
+
+      background-image:
+
+        linear-gradient(
+          rgba(102,177,218,.12) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(102,177,218,.12) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          rgba(102,177,218,.055) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(102,177,218,.055) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        120px 120px,
+        120px 120px,
+        24px 24px,
+        24px 24px;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+
+    .topbar {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      min-height: 72px;
+
+      padding: 14px 22px;
+
+      border-bottom: 1px solid var(--line);
+
+      background: rgba(4, 12, 19, .92);
+
+      backdrop-filter: blur(12px);
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 100;
+
+    }
+
+
+    .brand {
+
+      font-weight: 800;
+
+      font-size: .88rem;
+
+      letter-spacing: .16em;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .brand span {
+
+      color: var(--accent);
+
+    }
+
+
+    .topnav {
+
+      display: flex;
+
+      gap: 22px;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .78rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .08em;
+
+    }
+
+
+    .topnav a {
+
+      transition: color .2s ease;
+
+    }
+
+
+    .topnav a:hover {
+
+      color: var(--accent);
+
+    }
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+
+    .mobile-menu-button {
+
+      display: none;
+
+      border: 1px solid var(--line);
+
+      background: rgba(62,159,255,.08);
+
+      color: var(--text);
+
+      padding: 9px 12px;
+
+      cursor: pointer;
+
+      font-family: "Courier New", monospace;
+
+      font-size: .7rem;
+
+    }
+
+
+    .mobile-menu {
+
+      display: none;
+
+      border-bottom: 1px solid var(--line);
+
+      background: rgba(4,12,19,.97);
+
+    }
+
+
+    .mobile-menu.open {
+
+      display: block;
+
+    }
+
+
+    .mobile-menu a {
+
+      display: block;
+
+      padding: 15px 20px;
+
+      border-bottom: 1px solid rgba(138,192,220,.12);
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .78rem;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .mobile-menu a:hover {
+
+      color: var(--accent);
+
+      background: rgba(62,159,255,.05);
+
+    }
+
+
+    /* =========================================================
+       PAGE LAYOUT
+    ========================================================= */
+
+
+    .page {
+
+      display: block;
+
+     
+
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
+
+
+    .sidebar {
+
+      min-height: calc(100vh - 72px);
+
+      padding: 28px 18px;
+
+      border-right: 1px solid var(--line);
+
+      background: rgba(5,14,22,.78);
+
+      position: sticky;
+
+      top: 72px;
+
+      align-self: start;
+
+    }
+
+
+    .sidebar-title {
+
+      margin: 0 0 22px;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .15em;
+
+    }
+
+
+    .sidebar-nav {
+
+      display: grid;
+
+      gap: 7px;
+
+    }
+
+
+    .sidebar-nav a {
+
+      padding: 10px 11px;
+
+      border-left: 2px solid transparent;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .8rem;
+
+      transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+
+    }
+
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+
+      color: var(--accent);
+
+      border-left-color: var(--accent);
+
+      background: rgba(62,159,255,.07);
+
+    }
+
+
+    .sidebar-drawing {
+
+      margin-top: 55px;
+
+      padding: 13px;
+
+      border: 1px solid var(--line);
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .63rem;
+
+      line-height: 1.7;
+
+    }
+
+
+    .sidebar-drawing .blue {
+
+      color: var(--accent);
+
+    }
+
+
+    /* =========================================================
+       CONTENT
+    ========================================================= */
+
+
+    .content {
+
+      min-width: 0;
+
+    }
+
+
+    /* =========================================================
+       PAGE HERO
+    ========================================================= */
+
+
+    .page-hero {
+
+      padding: 52px 42px 38px;
+
+      border-bottom: 1px solid var(--line);
+
+    }
+
+
+    .eyebrow {
+
+      margin-bottom: 12px;
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .16em;
+
+    }
+
+
+    .page-hero h1 {
+
+      margin: 0;
+
+      font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+      font-size:
+        clamp(
+          3.2rem,
+          7vw,
+          6.8rem
+        );
+
+      font-weight: 500;
+
+      line-height: .84;
+
+      letter-spacing: .025em;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .page-hero h1 span {
+
+      color: var(--accent);
+
+    }
+
+
+    .hero-subtitle {
+
+      margin: 20px 0 0;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .95rem;
+
+      line-height: 1.7;
+
+      max-width: 750px;
+
+    }
+
+
+    /* =========================================================
+       PROJECT SUMMARY BAND
+    ========================================================= */
+
+
+    .summary-band {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      border-bottom: 1px solid var(--line);
+
+    }
+
+
+    .summary-card {
+
+      padding: 22px;
+
+      border-right: 1px solid var(--line);
+
+      background: rgba(62,159,255,.025);
+
+    }
+
+
+    .summary-card:last-child {
+
+      border-right: 0;
+
+    }
+
+
+    .summary-label {
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .66rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .14em;
+
+    }
+
+
+    .summary-card strong {
+
+      display: block;
+
+      margin-top: 8px;
+
+      font-family: "Courier New", monospace;
+
+      font-size: .95rem;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .summary-card p {
+
+      margin: 8px 0 0;
+
+      color: var(--muted);
+
+      font-size: .8rem;
+
+      line-height: 1.55;
+
+    }
+
+
+    /* =========================================================
+       PROJECT SECTION
+    ========================================================= */
+
+
+    .projects-section {
+
+      padding: 32px;
+
+    }
+
+
+    .section-label {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 25px;
+
+      padding-bottom: 14px;
+
+      border-bottom: 1px solid var(--line);
+
+    }
+
+
+    .section-number {
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+
+      font-size: 1.4rem;
+
+    }
+
+
+    .section-label h2 {
+
+      margin: 0;
+
+      padding-left: 14px;
+
+      border-left: 5px solid var(--orange);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .98rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .06em;
+
+    }
+
+
+    /* =========================================================
+       PROJECT GRID
+    ========================================================= */
+
+
+    .projects-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 22px;
+
+    }
+
+
+    /* =========================================================
+       PROJECT CARD
+    ========================================================= */
+
+
+    .project-card {
+
+      display: flex;
+
+      flex-direction: column;
+
+      min-width: 0;
+
+      min-height: 475px;
+
+      border: 1px solid var(--line);
+
+      background: rgba(8,20,31,.78);
+
+      overflow: hidden;
+
+      position: relative;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+
+    }
+
+
+    .project-card:hover {
+
+      transform: translateY(-5px);
+
+      border-color: var(--line-bright);
+
+      box-shadow:
+        0 20px 45px rgba(0,0,0,.32);
+
+    }
+
+
+    /* =========================================================
+       PROJECT IMAGE
+    ========================================================= */
+
+
+    .project-image {
+
+      position: relative;
+
+      padding: 11px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(62,159,255,.08),
+          rgba(0,0,0,.14)
+        );
+
+    }
+
+
+    .project-image::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 6px;
+      left: 6px;
+
+      width: 22px;
+      height: 22px;
+
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+
+      pointer-events: none;
+
+    }
+
+
+    .project-image::after {
+
+      content: "";
+
+      position: absolute;
+
+      right: 6px;
+      bottom: 6px;
+
+      width: 22px;
+      height: 22px;
+
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+
+      pointer-events: none;
+
+    }
+
+
+    .project-image img {
+
+      display: block;
+
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      object-fit: cover;
+
+      border: 1px solid rgba(138,192,220,.25);
+
+    }
+
+
+    .project-number {
+
+      position: absolute;
+
+      top: 20px;
+      left: 20px;
+
+      padding: 5px 8px;
+
+      border: 1px solid var(--line);
+
+      background: rgba(4,12,19,.9);
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .62rem;
+
+      letter-spacing: .08em;
+
+    }
+
+
+    /* =========================================================
+       PROJECT CONTENT
+    ========================================================= */
+
+
+    .project-content {
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+
+      padding: 21px;
+
+    }
+
+
+    .project-type {
+
+      margin-bottom: 8px;
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .62rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+
+    }
+
+
+    .project-card h3 {
+
+      margin: 0 0 11px;
+
+      font-family: "Courier New", monospace;
+
+      font-size: 1.02rem;
+
+      line-height: 1.4;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .project-card p {
+
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: .84rem;
+
+      line-height: 1.7;
+
+    }
+
+
+    .project-card-footer {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-top: auto;
+
+      padding-top: 20px;
+
+    }
+
+
+    .project-explore {
+
+      color: var(--accent);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .7rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .08em;
+
+    }
+
+
+    .project-rev {
+
+      color: rgba(167,189,201,.55);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .58rem;
+
+    }
+
+
+    /* =========================================================
+       BOTTOM NAV
+    ========================================================= */
+
+
+    .bottom-navigation {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 30px;
+
+      padding-top: 25px;
+
+      border-top: 1px solid var(--line);
+
+    }
+
+
+    .back-link {
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .06em;
+
+      transition: color .2s ease;
+
+    }
+
+
+    .back-link:hover {
+
+      color: var(--accent);
+
+    }
+
+
+    .all-projects-status {
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .62rem;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .all-projects-status span {
+
+      color: var(--accent);
+
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+
+    .footer {
+
+      padding: 27px;
+
+      border-top: 1px solid var(--line);
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-family: "Courier New", monospace;
+
+      font-size: .65rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .08em;
+
+    }
+
+
+    .footer strong {
+
+      color: var(--accent);
+
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+
+    @media (max-width: 1100px) {
+
+      .page {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .sidebar {
+
+        display: none;
+
+      }
+
+
+      .topnav {
+
+        display: none;
+
+      }
+
+
+      .mobile-menu-button {
+
+        display: block;
+
+      }
+
+    }
+
+
+    @media (max-width: 850px) {
+
+      .projects-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .summary-band {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .summary-card {
+
+        border-right: 0;
+
+        border-bottom: 1px solid var(--line);
+
+      }
+
+
+      .summary-card:last-child {
+
+        border-bottom: 0;
+
+      }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+      .site-shell {
+
+        width: 100%;
+
+        margin: 0;
+
+        border-left: 0;
+        border-right: 0;
+
+      }
+
+
+      .page-hero {
+
+        padding: 40px 22px 32px;
+
+      }
+
+
+      .page-hero h1 {
+
+        font-size:
+          clamp(
+            3rem,
+            17vw,
+            5rem
+          );
+
+      }
+
+
+      .projects-section {
+
+        padding: 24px 18px;
+
+      }
+
+
+      .project-card {
+
+        min-height: 430px;
+
+      }
+
+
+      .bottom-navigation {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="site-shell">
+
+```
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+
+<header class="topbar">
+
+  <a
+    href="../index.html"
+    class="brand"
+  >
+    Keith Flesher <span>/</span> Engineering Portfolio
+  </a>
+
+
+  <nav class="topnav">
+
+    <a href="../index.html">
+      Home
+    </a>
+
+    <a href="../index.html#experience-skills">
+      Toolset
+    </a>
+
+    <a href="certifications-list.html">
+      Certifications
+    </a>
+
+    <a href="../index.html#contact">
+      Contact
+    </a>
+
+  </nav>
+
+
+  <button
+    class="mobile-menu-button"
+    id="mobileMenuButton"
+    aria-label="Open navigation menu"
+  >
+    MENU
+  </button>
+
+</header>
+
+
+<!-- =====================================================
+     MOBILE NAV
+====================================================== -->
+
+
+<div
+  class="mobile-menu"
+  id="mobileMenu"
+>
+
+  <a href="../index.html">
+    Home
+  </a>
+
+  <a href="../index.html#projects">
+    Projects
+  </a>
+
+  <a href="../index.html#experience-skills">
+    Engineering Toolset
+  </a>
+
+  <a href="certifications-list.html">
+    Certifications
+  </a>
+
+  <a href="../index.html#contact">
+    Contact
+  </a>
+
+</div>
+
+
+<div class="page">
+
+
+  <!-- ===================================================
+       MAIN CONTENT
+  ==================================================== -->
+
+
+  <main class="content">
+
+
+    <!-- =================================================
+         PAGE HERO
+    ================================================== -->
+
+
+    <section class="page-hero">
+
+      <div class="eyebrow">
+        ENGINEERING PORTFOLIO
+      </div>
+
+
+      <h1>
+        All<br>
+        <span>Projects</span>
+      </h1>
+
+
+      <p class="hero-subtitle">
+        A collection of engineering work covering competitive
+        robotics, CNC manufacturing, mechanical design,
+        fabrication, engine systems, electronics, and
+        product development.
+      </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROJECTS
+    ================================================== -->
+
+
+    <section
+      class="projects-section"
+      id="projects"
+    >
+
+
+     
+
+
+      <div class="projects-grid">
+
+
+        <!-- =============================================
+             PROJECT 1
+        ============================================== -->
+
+
+        <a
+          href="project-1.html"
+          class="project-card"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="../assets/jpeg/project-1.1.jpg"
+              alt="FRC robotics engineering and fabrication"
+              loading="lazy"
+            />
+
+            <div class="project-number">
+              PROJECT / 01
+            </div>
+
+          </div>
+
+
+          <div class="project-content">
+
+            <div class="project-type">
+              Robotics / Fabrication / Leadership
+            </div>
+
+
+            <h3>
+              FRC Robotics Engineering &
+              Fabrication Leadership
+            </h3>
+
+
+            <p>
+              Led fabrication, CNC manufacturing,
+              robot assembly, and technical operations
+              across multiple competitive robotics seasons,
+              including manufacturing workflow development,
+              machine restoration, and rapid competition
+              repair.
+            </p>
+
+
+            <div class="project-card-footer">
+
+              <div class="project-explore">
+                Explore Project →
+              </div>
+
+              <div class="project-rev">
+                DOC / 01
+              </div>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- =============================================
+             PROJECT 2
+        ============================================== -->
+
+
+        <a
+          href="project-2.html"
+          class="project-card"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="../assets/jpeg/project-2.1.jpg"
+              alt="CNC manufacturing project"
+              loading="lazy"
+            />
+
+            <div class="project-number">
+              PROJECT / 02
+            </div>
+
+          </div>
+
+
+          <div class="project-content">
+
+            <div class="project-type">
+              CNC / Manufacturing / Tuning
+            </div>
+
+
+            <h3>
+              CNC Manufacturing
+            </h3>
+
+
+            <p>
+              Built, operated, maintained, tuned, and
+              documented a 3-axis CNC router system used
+              for robotics manufacturing over three
+              competitive seasons.
+            </p>
+
+
+            <div class="project-card-footer">
+
+              <div class="project-explore">
+                Explore Project →
+              </div>
+
+              <div class="project-rev">
+                DOC / 02
+              </div>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- =============================================
+             PROJECT 3
+        ============================================== -->
+
+
+        <a
+          href="project-3.html"
+          class="project-card"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="../assets/jpeg/project-3.1.jpg"
+              alt="TorqueDrive socket adapter"
+              loading="lazy"
+            />
+
+            <div class="project-number">
+              PROJECT / 03
+            </div>
+
+          </div>
+
+
+          <div class="project-content">
+
+            <div class="project-type">
+              Product Design / CAD / Prototyping
+            </div>
+
+
+            <h3>
+              TorqueDrive Socket Adapter
+            </h3>
+
+
+            <p>
+              Designed and developed a torque-assist
+              socket adapter using the engineering design
+              process, including prototyping, testing,
+              CAD development, and product iteration.
+            </p>
+
+
+            <div class="project-card-footer">
+
+              <div class="project-explore">
+                Explore Project →
+              </div>
+
+              <div class="project-rev">
+                DOC / 03
+              </div>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- =============================================
+             PROJECT 4
+        ============================================== -->
+
+
+        <a
+          href="project-4.html"
+          class="project-card"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="../assets/jpeg/project-4.1.jpg"
+              alt="23 horsepower Kohler engine rebuild"
+              loading="lazy"
+            />
+
+            <div class="project-number">
+              PROJECT / 04
+            </div>
+
+          </div>
+
+
+          <div class="project-content">
+
+            <div class="project-type">
+              Engine / Diagnostics / Mechanical
+            </div>
+
+
+            <h3>
+              Engine Rebuild
+            </h3>
+
+
+            <p>
+              Complete teardown and rebuild of a 23 HP
+              Kohler 4-stroke engine for a skid-loader
+              hydraulic system, including diagnostics,
+              machining, timing, and full reassembly.
+            </p>
+
+
+            <div class="project-card-footer">
+
+              <div class="project-explore">
+                Explore Project →
+              </div>
+
+              <div class="project-rev">
+                DOC / 04
+              </div>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- =============================================
+             PROJECT 5
+        ============================================== -->
+
+
+        <a
+          href="project-5.html"
+          class="project-card"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="../assets/png/project-5.png"
+              alt="Swap Mini portable retro gaming system"
+              loading="lazy"
+            />
+
+            <div class="project-number">
+              PROJECT / 05
+            </div>
+
+          </div>
+
+
+          <div class="project-content">
+
+            <div class="project-type">
+              Electronics / CAD / Reverse Engineering
+            </div>
+
+
+            <h3>
+              Swap Mini —
+              Portable Retro Gaming System
+            </h3>
+
+
+            <p>
+              Developed a custom handheld retro gaming
+              system using PCB design, Raspberry Pi
+              integration, reverse engineering, and
+              custom CAD enclosure development.
+            </p>
+
+
+            <div class="project-card-footer">
+
+              <div class="project-explore">
+                Explore Project →
+              </div>
+
+              <div class="project-rev">
+                DOC / 05
+              </div>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- =============================================
+             PROJECT 6
+        ============================================== -->
+
+
+        <a
+          href="project-6.html"
+          class="project-card"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="../assets/png/project-auto.png"
+              alt="Automation systems"
+              loading="lazy"
+            />
+
+            <div class="project-number">
+              PROJECT / 06
+            </div>
+
+          </div>
+
+
+          <div class="project-content">
+
+            <div class="project-type">
+              Automation / Mechanical Systems
+            </div>
+
+
+            <h3>
+              Automation Systems
+            </h3>
+
+
+            <p>
+              Mechanical automation and control system
+              integration focused on developing practical
+              mechanical systems and improving workflow
+              efficiency.
+            </p>
+
+
+            <div class="project-card-footer">
+
+              <div class="project-explore">
+                Explore Project →
+              </div>
+
+              <div class="project-rev">
+                DOC / 06
+              </div>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+
+      <!-- =================================================
+           BOTTOM NAVIGATION
+      ================================================== -->
+
+
+      <div class="bottom-navigation">
+
+        <a
+          href="../index.html#projects"
+          class="back-link"
+        >
+          ← Back to Homepage Projects
+        </a>
+
+
+        <div class="all-projects-status">
+          ARCHIVE STATUS:
+          <span>ONLINE</span>
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+
+    <footer class="footer">
+
+      <strong>
+        KEITH FLESHER
+      </strong>
+
+      &nbsp; • &nbsp;
+
+      MECHANICAL ENGINEERING
+
+      &nbsp; • &nbsp;
+
+      PROJECT ARCHIVE
+
+      &nbsp; • &nbsp;
+
+      REV 2026.1
+
+    </footer>
+
+
+  </main>
+
+</div>
+```
+
+  </div>
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+  <script>
+
+    const mobileMenuButton =
+      document.getElementById(
+        "mobileMenuButton"
+      );
+
+
+    const mobileMenu =
+      document.getElementById(
+        "mobileMenu"
+      );
+
+
+    mobileMenuButton.addEventListener(
+      "click",
+      () => {
+
+        mobileMenu.classList.toggle(
+          "open"
+        );
+
+
+        mobileMenuButton.textContent =
+          mobileMenu.classList.contains("open")
+            ? "CLOSE"
+            : "MENU";
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".mobile-menu a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            mobileMenu.classList.remove(
+              "open"
+            );
+
+            mobileMenuButton.textContent =
+              "MENU";
+
+          }
+        );
+
+      });
+
+  </script>
+
+</body>
+
+</html>
