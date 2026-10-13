@@ -3,7 +3,10 @@ git add .
 git commit -m "describe what changed"
 git push
 
+git remote set-url origin https://github.com/KeithFlesher/Portfolio.git
 
+
+ 
 https://www.svgrepo.com/svg/272677/industrial-robot-factory?edit=true   
 
 
