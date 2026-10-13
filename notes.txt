@@ -5,7 +5,7 @@ git push
 
 git remote set-url origin https://github.com/KeithFlesher/Portfolio.git
 git remote set-url origin https://keithflesher.github.io/Engineering-Portfolio/.git
-
+git remote -v
  
 https://www.svgrepo.com/svg/272677/industrial-robot-factory?edit=true   
 
